@@ -1,11 +1,10 @@
 package vaultcrt
 
 type CreateConfig struct {
-	AltNames      string
-	CommonName    string
+	AltNames      []string
 	ID            string
-	IPSANs        string
-	Organizations string
+	IPSANs        []string
+	Organizations []string
 	TTL           string
 }
 

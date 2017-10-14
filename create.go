@@ -1,6 +1,9 @@
 package vaultcrt
 
 import (
+	"fmt"
+	"strings"
+
 	"github.com/giantswarm/microerror"
 	"github.com/giantswarm/vaultcrt/key"
 )
@@ -8,9 +11,9 @@ import (
 func (c *VaultCrt) Create(config CreateConfig) (CreateResult, error) {
 	k := key.IssuePath(config.ID, config.Organizations)
 	v := map[string]interface{}{
-		"alt_names":   config.AltNames,
-		"common_name": config.CommonName,
-		"ip_sans":     config.IPSANs,
+		"alt_names":   strings.Join(config.AltNames, ","),
+		"common_name": fmt.Sprintf(c.commonNameFormat, config.ID),
+		"ip_sans":     strings.Join(config.IPSANs, ","),
 		"ttl":         config.TTL,
 	}
 
