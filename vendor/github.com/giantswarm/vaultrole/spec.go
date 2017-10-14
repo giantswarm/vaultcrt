@@ -3,15 +3,15 @@ package vaultrole
 type CreateConfig struct {
 	AllowBareDomains bool
 	AllowSubdomains  bool
-	AllowedDomains   string
+	AltNames         []string
 	ID               string
-	Organizations    string
+	Organizations    []string
 	TTL              string
 }
 
 type ExistsConfig struct {
 	ID            string
-	Organizations string
+	Organizations []string
 }
 
 type Interface interface {
