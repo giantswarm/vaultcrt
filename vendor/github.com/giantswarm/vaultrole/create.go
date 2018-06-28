@@ -1,26 +1,40 @@
 package vaultrole
 
 import (
-	"strings"
-
 	"github.com/giantswarm/microerror"
-
-	"github.com/giantswarm/vaultrole/key"
 )
 
 func (r *VaultRole) Create(config CreateConfig) error {
-	k := key.WriteRolePath(config.ID, config.Organizations)
-	v := map[string]interface{}{
-		"allow_bare_domains": config.AllowBareDomains,
-		"allow_subdomains":   config.AllowSubdomains,
-		"allowed_domains":    key.AllowedDomains(config.ID, r.commonNameFormat, config.AltNames),
-		"organization":       strings.Join(config.Organizations, ","),
-		"ttl":                config.TTL,
+	// Check if the requested role exists.
+	{
+		c := ExistsConfig{
+			ID:            config.ID,
+			Organizations: config.Organizations,
+		}
+		exists, err := r.Exists(c)
+		if err != nil {
+			return microerror.Mask(err)
+		}
+		if exists {
+			return microerror.Maskf(alreadyExistsError, config.ID)
+		}
 	}
 
-	_, err := r.vaultClient.Logical().Write(k, v)
-	if err != nil {
-		return microerror.Mask(err)
+	// Create the requested role if it does not exist.
+	{
+		c := writeConfig{
+			AllowBareDomains: config.AllowBareDomains,
+			AllowSubdomains:  config.AllowSubdomains,
+			AltNames:         config.AltNames,
+			ID:               config.ID,
+			Organizations:    config.Organizations,
+			TTL:              config.TTL,
+		}
+
+		err := r.write(c)
+		if err != nil {
+			return microerror.Mask(err)
+		}
 	}
 
 	return nil
