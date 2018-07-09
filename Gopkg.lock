@@ -23,10 +23,10 @@
   revision = "39f8cfb7c2583edb28552d9e4b12193e5bddaf60"
 
 [[projects]]
-  branch = "master"
+  branch = "vault-update"
   name = "github.com/giantswarm/vaultrole"
   packages = ["key"]
-  revision = "0ed480b92efb4a819acff15316b12db0d3cf415e"
+  revision = "576ff8099af8732c45b594b5f62ca653fdd41242"
 
 [[projects]]
   name = "github.com/go-kit/kit"
@@ -161,6 +161,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "e16fff8c7236cc8fac644602f060f1f61f30d95d9542569cc693289c0504fc10"
+  inputs-digest = "19d4a1c06b3b4089c349fb6d61cb39e58aa2a3170124eedbf1f3f84cac956846"
   solver-name = "gps-cdcl"
   solver-version = 1

@@ -30,7 +30,8 @@
   name = "github.com/giantswarm/micrologger"
 
 [[constraint]]
-  branch = "master"
+  # TODO: Change to master when everything tested
+  branch = "vault-update"
   name = "github.com/giantswarm/vaultrole"
 
 [[constraint]]
