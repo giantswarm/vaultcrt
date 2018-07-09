@@ -36,4 +36,4 @@
 
 [[constraint]]
   name = "github.com/hashicorp/vault"
-  version = "0.7.3"
+  version = "0.10.3"
