@@ -4,6 +4,7 @@ import (
 	"strings"
 
 	"github.com/giantswarm/microerror"
+
 	"github.com/giantswarm/vaultcrt/key"
 )
 
